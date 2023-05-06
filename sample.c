@@ -34,7 +34,7 @@ static int progress(
     const lbfgsfloatval_t step,
     int n,
     int k,
-    int ls) {}
+    int ls) {return 0;}
 #else 
 static int progress(
     void *instance,
