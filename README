@@ -44,10 +44,6 @@ to modify these parameters to use the SSE optimization routines.
 To use the SSE2 optimization routine, #define USE_SSE in the same place
 you #define LBFGS_IMPLEMENTATION
 
-I (Harris) am not sure if you should use this... I suspect that GCC and
-friends will probabl do a perfectly fine job with the simple routines in 
-lbfgs_arithmetic_ansi.h. Please let me know if you test this!
-
 =========================================================================
 4. Note on floating point precision
 =========================================================================
