@@ -33,26 +33,14 @@ you #include "lbfgs.h"
 
 
 =========================================================================
-3. Note on SSE/SSE2 optimization
-=========================================================================
-This library has SSE/SSE2 optimization routines for vector arithmetic
-operations on Intel/AMD processors. The SSE2 routine is for 64 bit double
-values, and the SSE routine is for 32 bit float values. Since the default
-parameters in libLBFGS are tuned for double precision values, it may need
-to modify these parameters to use the SSE optimization routines.
-
-To use the SSE2 optimization routine, #define USE_SSE in the same place
-you #define LBFGS_IMPLEMENTATION
-
-=========================================================================
-4. Note on floating point precision
+3. Note on floating point precision
 =========================================================================
 This library uses double precision by default. If you want single,
 `#define LBFGS_FLOAT 32` before you include "lbfgs.h" (everywhere).
 
 
 =========================================================================
-5. License
+4. License
 =========================================================================
 libLBFGS is distributed under the term of the MIT license.
 Please refer to COPYING file in the distribution.
