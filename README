@@ -27,7 +27,7 @@ http://www.chokkan.org/software/liblbfgs/
 =========================================================================
 2. How to build
 =========================================================================
-No build. Just drop lbfgs*.h into your project and #include them. 
+No build. Just drop lbfgs.h into your project and #include them. 
 In exactly one C file, you need to define LBFGS_IMPLEMENTATION before
 you #include "lbfgs.h"
 
