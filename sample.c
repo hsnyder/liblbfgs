@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <lbfgs.h>
+#include "lbfgs.h"
 
 static lbfgsfloatval_t evaluate(
     void *instance,
