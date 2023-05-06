@@ -7,6 +7,8 @@
 =========================================================================
 1. Introduction
 =========================================================================
+This is a fork of libLBFGS, restructured to be a header-only library.
+
 libLBFGS is a C port of the implementation of Limited-memory
 Broyden-Fletcher-Goldfarb-Shanno (L-BFGS) method written by Jorge Nocedal.
 The original FORTRAN source code is available at:
@@ -24,22 +26,9 @@ http://www.chokkan.org/software/liblbfgs/
 =========================================================================
 2. How to build
 =========================================================================
-[Microsoft Visual Studio 2008]
-Open the solution file "lbfgs.sln" and build it.
-
-[GCC]
-
-On top of a compiler and GNU Make, you will also need to install libtool
-and automake to build.
-
-On Debian distributions, this can be installed with:
-sudo apt install libtool automake
-
-$ ./autogen.sh
-$ ./configure
-$ make
-$ make install  # To install libLBFGS library and header.
-
+No build. Just drop lbfgs*.h into your project and #include them. 
+In exactly one C file, you need to define LBFGS_IMPLEMENTATION before
+you #include "lbfgs.h"
 
 
 =========================================================================
@@ -51,27 +40,19 @@ values, and the SSE routine is for 32 bit float values. Since the default
 parameters in libLBFGS are tuned for double precision values, it may need
 to modify these parameters to use the SSE optimization routines.
 
-To use the SSE2 optimization routine, specify --enable-sse2 option to the
-configure script.
-
-$ ./configure --enable-sse2
-
-To build libLBFGS with SSE2 optimization enabled on Microsoft Visual
-Studio 2005, define USE_SSE and __SSE2__ symbols.
-
-Make sure to run libLBFGS on processors where SSE2 instrunctions are
-available. The library does not check the existence of SSE2 instructions.
-
-To package maintainers,
-
-Please do not enable SSE/SSE2 optimization routine. The library built
-with SSE/SSE2 optimization will crash without any notice when necessary
-SSE/SSE2 instructions are unavailable on CPUs.
-
+To use the SSE2 optimization routine, #define USE_SSE in the same place
+you #define LBFGS_IMPLEMENTATION
 
 
 =========================================================================
-4. License
+4. Note on floating point precision
+=========================================================================
+This library uses double precision by default. If you want single,
+`#define LBFGS_FLOAT 32` before you include "lbfgs.h" (everywhere).
+
+
+=========================================================================
+5. License
 =========================================================================
 libLBFGS is distributed under the term of the MIT license.
 Please refer to COPYING file in the distribution.
