@@ -494,7 +494,7 @@ int lbfgs(
  *
  *  @param  param       The pointer to the parameter structure.
  */
-void lbfgs_parameter_init(lbfgs_parameter_t *param);
+lbfgs_parameter_t lbfgs_parameter_defaults(void);
 
 /**
  * Allocate an array for variables.
@@ -1112,9 +1112,9 @@ void lbfgs_free(lbfgsfloatval_t *x)
     vecfree(x);
 }
 
-void lbfgs_parameter_init(lbfgs_parameter_t *param)
+lbfgs_parameter_t lbfgs_parameter_defaults()
 {
-    memcpy(param, &_defparam, sizeof(*param));
+    return _defparam;
 }
 
 int lbfgs(

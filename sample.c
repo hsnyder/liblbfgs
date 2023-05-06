@@ -59,14 +59,14 @@ static int progress(
 
 #define N   100
 
-#include <immintrin.h>
-
 int main(int argc, char *argv[])
 {
     int i, ret = 0;
     lbfgsfloatval_t fx;
     lbfgsfloatval_t *x = lbfgs_malloc(N);
-    lbfgs_parameter_t param;
+
+    lbfgs_parameter_t param = lbfgs_parameter_defaults();
+    /*param.linesearch = LBFGS_LINESEARCH_BACKTRACKING;*/
 
     if (x == NULL) {
         printf("ERROR: Failed to allocate a memory block for variables.\n");
@@ -79,23 +79,16 @@ int main(int argc, char *argv[])
         x[i+1] = 1.0;
     }
 
-    /* Initialize the parameters for the L-BFGS optimization. */
-    lbfgs_parameter_init(&param);
-    /*param.linesearch = LBFGS_LINESEARCH_BACKTRACKING;*/
 
     /*
         Start the L-BFGS optimization; this will invoke the callback functions
         evaluate() and progress() when necessary.
      */
-    long long tsc1 = _rdtsc();
     ret = lbfgs(N, x, &fx, evaluate, progress, NULL, &param);
-    long long tsc2 = _rdtsc();
 
     /* Report the result. */
     printf("L-BFGS optimization terminated with status code = %d\n", ret);
     printf("  fx = %f, x[0] = %f, x[1] = %f\n", fx, x[0], x[1]);
-
-    printf("TIME STAMP COUNTER DIFFERENCE: %lli\n", tsc2-tsc1);
 
     lbfgs_free(x);
     return 0;
