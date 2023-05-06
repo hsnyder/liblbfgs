@@ -31,13 +31,7 @@
 #endif
 #include <memory.h>
 
-#if     1400 <= _MSC_VER
-#include <intrin.h>
-#endif/*1400 <= _MSC_VER*/
-
-#if     HAVE_EMMINTRIN_H
-#include <emmintrin.h>
-#endif/*HAVE_EMMINTRIN_H*/
+#include <immintrin.h>
 
 inline static void* vecalloc(size_t size)
 {

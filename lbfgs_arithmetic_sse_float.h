@@ -31,13 +31,7 @@
 #endif
 #include <memory.h>
 
-#if     1400 <= _MSC_VER
-#include <intrin.h>
-#endif/*_MSC_VER*/
-
-#if     HAVE_XMMINTRIN_H
-#include <xmmintrin.h>
-#endif/*HAVE_XMMINTRIN_H*/
+#include <immintrin.h>
 
 #if     LBFGS_FLOAT == 32 && LBFGS_IEEE_FLOAT
 #define fsigndiff(x, y) (((*(uint32_t*)(x)) ^ (*(uint32_t*)(y))) & 0x80000000U)

@@ -49,9 +49,11 @@ extern "C" {
 
 #if     LBFGS_FLOAT == 32
 typedef float lbfgsfloatval_t;
+#define SQRT sqrtf
 
 #elif   LBFGS_FLOAT == 64
 typedef double lbfgsfloatval_t;
+#define SQRT sqrt
 
 #else
 #error "libLBFGS supports single (float; LBFGS_FLOAT = 32) or double (double; LBFGS_FLOAT=64) precision only."
@@ -1211,7 +1213,7 @@ int lbfgs(
     }
 
     /* Compute the initial step:
-        step = 1.0 / sqrt(vecdot(d, d, n))
+        step = 1.0 / SQRT(vecdot(d, d, n))
      */
     vec2norminv(&step, d, n);
 
@@ -1898,9 +1900,9 @@ static int line_search_morethuente(
     q = fabs(du); \
     r = fabs(dv); \
     s = max3(p, q, r); \
-    /* gamma = s*sqrt((theta/s)**2 - (du/s) * (dv/s)) */ \
+    /* gamma = s*SQRT((theta/s)**2 - (du/s) * (dv/s)) */ \
     a = theta / s; \
-    gamma = s * sqrt(a * a - ((du) / s) * ((dv) / s)); \
+    gamma = s * SQRT(a * a - ((du) / s) * ((dv) / s)); \
     if ((v) < (u)) gamma = -gamma; \
     p = gamma - (du) + theta; \
     q = gamma - (du) + gamma + (dv); \
@@ -1926,9 +1928,9 @@ static int line_search_morethuente(
     q = fabs(du); \
     r = fabs(dv); \
     s = max3(p, q, r); \
-    /* gamma = s*sqrt((theta/s)**2 - (du/s) * (dv/s)) */ \
+    /* gamma = s*SQRT((theta/s)**2 - (du/s) * (dv/s)) */ \
     a = theta / s; \
-    gamma = s * sqrt(max2(0, a * a - ((du) / s) * ((dv) / s))); \
+    gamma = s * SQRT(max2(0, a * a - ((du) / s) * ((dv) / s))); \
     if ((u) < (v)) gamma = -gamma; \
     p = gamma - (dv) + theta; \
     q = gamma - (dv) + gamma + (du); \
