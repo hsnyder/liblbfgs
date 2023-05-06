@@ -7,7 +7,8 @@
 =========================================================================
 1. Introduction
 =========================================================================
-This is a fork of libLBFGS, restructured to be a header-only library.
+This is a fork of libLBFGS, restructured to be a header-only library by
+Harris Snyder.
 
 libLBFGS is a C port of the implementation of Limited-memory
 Broyden-Fletcher-Goldfarb-Shanno (L-BFGS) method written by Jorge Nocedal.
@@ -42,7 +43,6 @@ to modify these parameters to use the SSE optimization routines.
 
 To use the SSE2 optimization routine, #define USE_SSE in the same place
 you #define LBFGS_IMPLEMENTATION
-
 
 =========================================================================
 4. Note on floating point precision
