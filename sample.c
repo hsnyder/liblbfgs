@@ -23,6 +23,19 @@ static lbfgsfloatval_t evaluate(
     return fx;
 }
 
+#ifdef DISABLE_PROGRESS
+static int progress(
+    void *instance,
+    const lbfgsfloatval_t *x,
+    const lbfgsfloatval_t *g,
+    const lbfgsfloatval_t fx,
+    const lbfgsfloatval_t xnorm,
+    const lbfgsfloatval_t gnorm,
+    const lbfgsfloatval_t step,
+    int n,
+    int k,
+    int ls) {}
+#else 
 static int progress(
     void *instance,
     const lbfgsfloatval_t *x,
@@ -42,8 +55,11 @@ static int progress(
     printf("\n");
     return 0;
 }
+#endif
 
 #define N   100
+
+#include <immintrin.h>
 
 int main(int argc, char *argv[])
 {
@@ -71,11 +87,15 @@ int main(int argc, char *argv[])
         Start the L-BFGS optimization; this will invoke the callback functions
         evaluate() and progress() when necessary.
      */
+    long long tsc1 = _rdtsc();
     ret = lbfgs(N, x, &fx, evaluate, progress, NULL, &param);
+    long long tsc2 = _rdtsc();
 
     /* Report the result. */
     printf("L-BFGS optimization terminated with status code = %d\n", ret);
     printf("  fx = %f, x[0] = %f, x[1] = %f\n", fx, x[0], x[1]);
+
+    printf("TIME STAMP COUNTER DIFFERENCE: %lli\n", tsc2-tsc1);
 
     lbfgs_free(x);
     return 0;
