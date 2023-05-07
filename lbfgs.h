@@ -359,6 +359,11 @@ typedef struct {
     int             orthantwise_end;
 } lbfgs_parameter_t;
 
+typedef struct {
+	int num_iterations;
+	int num_fn_evals;
+	int status_code;
+} lbfgs_info;
 
 /**
  * Callback interface to provide objective function and gradient evaluations.
